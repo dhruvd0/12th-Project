@@ -2,9 +2,10 @@
 
 RUN MAIN.EXE TO PLAY CHESS
 
-
 Name:Dhruv Devasthale
+
 Objective: To simulate a chess game  with text files and c++ without graphics
+
 Future Intended Features :
 1.Improve Grahics
 2.Implement all the chess rules.
