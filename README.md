@@ -2,8 +2,6 @@
 
 #### Run Main.exe to play CHESS
 
-#### Name:Dhruv Devasthale
-
 #### Objective: To simulate a chess game  with text files and c++ without graphics
 
 #### Future Intended Features :
