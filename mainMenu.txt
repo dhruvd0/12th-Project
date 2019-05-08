@@ -1,0 +1,19 @@
+                          WELCOME TO ASCII CHESS  !
+
+    KEY:
+       -R:Rook
+       -K:King
+       -B:bishop
+       -Q:Queen
+       -P:Pawn
+       -N:Horse/Knight
+ 
+________________________________________________________________
+
+
+
+                             1.New game
+                             2.Leaderboard
+			     3.Exit
+                             
+                      Enter choice(1/2/3/4/5):
