@@ -1,2 +1,2 @@
-# Class-12th-C-Project
+# Class-12th-C++-Project
 Turbo Friendly 
