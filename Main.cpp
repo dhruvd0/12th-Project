@@ -9,14 +9,14 @@
 char boardSymbols[8][8]; //8x8 2d array containing piece symbols
 void displayBoard(int di, int dj);
 
-char error[10];
+char error[10];// string to display an error upon wrong move
 
 class moveClass //this is for creating a moveClass object to use the 4 parameters of the move
 {
 public:
   int si, sj, di, dj;
   //source and destination coordinates of the moveClass object ( moveClass controller)
-
+  // 0,0 is top left cell of the chess board not the conventional coordinate.
   moveClass()
   {
     si = 0;
@@ -25,14 +25,14 @@ public:
     dj = 0;
   }
 };
-class player //
+class player //player class
 {
 public:
   char name[50];
   int gamesWon;
   int gamesLost;
   char gameName[10];
-  char piece; //selected piece on the chess boards
+  char piece; //selected piece on the chess board by the player
 
   int games;
   int update();
@@ -44,7 +44,7 @@ public:
     games = 0;
     piece = ' ';
   }
-  void displayGame(moveClass m, int boardi, int boardj)
+  void displayGame(moveClass m, int boardi, int boardj)// displays the board along with other details
   {
     clrscr();
     displayBoard(boardi, boardj);
@@ -249,7 +249,7 @@ int player::update() //returns -1 for quit , 0 for move success ,1 for wrong mov
   piece = ' ';
   controller.sj = 0;
   controller.si = 0;
-  while (ch != 27) //loop to move the source controller
+  while (ch != 27) //loop to move the source controller i.e process to select the piece
   {
 
     ch = getch();
@@ -282,14 +282,15 @@ int player::update() //returns -1 for quit , 0 for move success ,1 for wrong mov
         controller.si = controller.si + 1;
       }
     }
-    else if (ch == 32) //ascii for space -> to fix the piece
+    else if (ch == 32) //ascii for space -> to fix the piece  , piece selected
     {
-      piece = boardSymbols[controller.si][controller.sj];
+      piece = boardSymbols[controller.si][controller.sj];//sets the piece
 
+      //transfer coordinates selected coordinates to place piece handler i.e controller.di,dj
       controller.dj = controller.sj;
       controller.di = controller.si;
       displayGame(controller, controller.di, controller.dj);
-      while (ch != 27) //loop to move the destination controller
+      while (ch != 27) //loop to move the destination controller, process to set the selected piece
       {
 
         ch = getch();
@@ -330,7 +331,7 @@ int player::update() //returns -1 for quit , 0 for move success ,1 for wrong mov
             strcpy(error, "wrong move ..");
             displayGame(controller, controller.di, controller.dj);
 
-            return 1;
+            return 1;//returns 1 and then eventually restarts player.update()
           }
           boardSymbols[controller.si][controller.sj] = ' ';
           boardSymbols[controller.di][controller.dj] = piece;
@@ -345,10 +346,10 @@ int player::update() //returns -1 for quit , 0 for move success ,1 for wrong mov
     }
     else if (ch == 27)
     {
-      return -1;
+      return -1;//esc => forfeit 
     }
 
-    displayGame(controller, controller.si, controller.sj);
+    displayGame(controller, controller.si, controller.sj); //displays the game after every hit on the keyboard
   }
   return 1;
 }
@@ -385,7 +386,7 @@ int checkMatePlayer2() //same as checkMatePlayer1()
   return 1;
 }
 
-void loadDefault() //extract the default data from the file into 2d array
+void loadDefault() //extract the default data((chess symbols) from the file into 2d array
 {
   fstream f;
   f.open("Data.txt", ios::in);
@@ -412,7 +413,7 @@ void loadDefault() //extract the default data from the file into 2d array
   f.close();
 }
 
-int player1Move(player &p1, player &p2)
+int player1Move(player &p1, player &p2)//returns 1 if player wins/forfeits , return 0 for move.
 {
   cout << p1.name << " ur move (u can only move upper pieces) :";
 
@@ -444,7 +445,7 @@ int player1Move(player &p1, player &p2)
 
   return 0;
 }
-int player2Move(player &p1, player &p2)
+int player2Move(player &p1, player &p2)//same as player1Move
 {
   cout << p2.name << " ur move (u can only move lowercase pieces) :";
   strcpy(error, " ");
@@ -827,19 +828,22 @@ void newGame() //initiates a new game: takes player's name , games name -> play(
   gets(player2.name);
   checkDemo(player1.name, player2.name);
   clrscr();
+
   loadDefault();
   play(player1, player2); //starts the actual chess game
+
+
   clrscr();
+  //update and write player details to leaderboard
   player1.games++;
   player2.games++;
-
   leaderboard_write(player1);
   leaderboard_write(player2);
   delay(1000);
   cout << endl;
 }
 
-void displayMenu() //displays the start page of the program
+void displayMenu() //displays welcome page
 {
 
   fstream f;
@@ -889,7 +893,7 @@ void leaderboard_menu()
     }
   }
 }
-void startGame() //gets the option and starts newGame() leaderboard_menu() or exit the game.
+void startGame() //inits welcome page, gets the option and starts newGame() leaderboard_menu() or exit the game.
 {
 
   char choice;
@@ -947,7 +951,7 @@ void displayBoard(int di, int dj) //displays the chess board
   cout << "  +---+---+---+---+---+---+---+---+" << endl;
 }
 
-void main()
+void main()//entry point
 {
 
   clrscr();
