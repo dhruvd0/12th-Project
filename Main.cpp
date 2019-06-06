@@ -1,10 +1,10 @@
-#include <iostream.h>
-#include <string.h>
-#include <fstream.h>
-#include <stdio.h>
+#include <iostream>
 #include <conio.h>
-#include <dos.h>
-#include <math.h>
+#include <string.h>
+#include <string>
+#include <fstream>
+#include <windows.h>
+using namespace std;
 
 char boardSymbols[8][8]; //8x8 2d array containing piece symbols
 void displayBoard(int di, int dj);
@@ -46,7 +46,7 @@ public:
   }
   void displayGame(moveClass m, int boardi, int boardj)// displays the board along with other details
   {
-    clrscr();
+    system("cls");
     displayBoard(boardi, boardj);
 
     cout << name << " W,A,S,D to move the controller , space to select a piece ,esc to forfeit " << endl;
@@ -424,18 +424,18 @@ int player1Move(player &p1, player &p2)//returns 1 if player wins/forfeits , ret
 
     if (move == -1)
     {
-      clrscr();
+      system("cls");
       cout << p2.name << " wins!!" << '\a' << endl;
-      delay(2000);
+      Sleep(2000);
       ++p2.gamesWon;
       ++p1.gamesLost;
       return 1;
     }
     else if (checkMatePlayer2()) //if player2's king is not present then checkmate by player 1 -> player 1 wins
     {
-      clrscr();
+      system("cls");
       cout << "checkmate" << p1.name << "wins" << endl;
-      delay(2000);
+      Sleep(2000);
       p1.gamesWon++;
       p2.gamesLost++;
       return 1;
@@ -454,18 +454,18 @@ int player2Move(player &p1, player &p2)//same as player1Move
   {
     if (move == -1)
     {
-      clrscr();
+      system("cls");
       cout << p1.name << "wins !!" << '\a' << endl;
-      delay(2000);
+      Sleep(2000);
       ++p1.gamesWon;
       ++p2.gamesLost;
       return 1;
     }
     else if (checkMatePlayer1()) //if player1's king is not present then checkmate by player 2 -> player 2 wins
     {
-      clrscr();
+      system("cls");
       cout << "checkmate!!" << p2.name << " wins " << endl;
-      delay(2000);
+      Sleep(2000);
       p2.gamesWon++;
       p1.gamesLost++;
       return 1;
@@ -480,14 +480,14 @@ void play(player &player1, player &player2) //evaluates player1Move and player2M
 
   while (1) //infinite loop till checkmate or if a player forfeits
   {
-    clrscr();
+    system("cls");
     displayBoard(-1, -1);
     if (player1Move(player1, player2))
     {
 
       break;
     }
-    clrscr();
+    system("cls");
     displayBoard(-1, -1);
     if (player2Move(player1, player2))
     {
@@ -581,14 +581,14 @@ int demo(char name[50]) //starts a demo for the chess
 {
 
   loadDefault();
-  clrscr();
+  system("cls");
   char c;
 
   while (1)
   {
     while (c != 'd')
     {
-      clrscr();
+      system("cls");
       cout << name << "  Welcome to ASCII CHESS! THIS IS A Tutorial(Press esc to skip tutorial)" << endl
            << endl;
       cout << "Step 1 : press d to move the controller to the right " << endl;
@@ -600,17 +600,17 @@ int demo(char name[50]) //starts a demo for the chess
       }
       else if (c == 'd')
       {
-        clrscr();
+        system("cls");
         displayBoard(1, 4);
         break;
       }
     }
 
-    delay(1000);
+    Sleep(1000);
 
     while (c != 'w')
     {
-      clrscr();
+      system("cls");
       cout << name << "  Welcome to ASCII CHESS! THIS IS A Tutorial(Press esc to skip tutorial)" << endl
            << endl;
       cout << "Step 2:  press w to move the controller up " << endl;
@@ -622,17 +622,17 @@ int demo(char name[50]) //starts a demo for the chess
       }
       else if (c == 'w')
       {
-        clrscr();
+        system("cls");
         displayBoard(0, 3);
         break;
       }
     }
-    delay(1000);
+    Sleep(1000);
 
-    clrscr();
+    system("cls");
     while (c != 'a')
     {
-      clrscr();
+      system("cls");
       cout << name << "   Welcome to ASCII CHESS! THIS IS A Tutorial(Press esc to skip tutorial)" << endl
            << endl;
       cout << "Step 3 : press a to move the controller left " << endl;
@@ -644,16 +644,16 @@ int demo(char name[50]) //starts a demo for the chess
       }
       else if (c == 'a')
       {
-        clrscr();
+        system("cls");
         displayBoard(1, 2);
       }
     }
-    delay(1000);
+    Sleep(1000);
 
-    clrscr();
+    system("cls");
     while (c != 's')
     {
-      clrscr();
+      system("cls");
       cout << name << "  Welcome to ASCII CHESS! THIS IS A Tutorial(Press esc to skip tutorial)" << endl
            << endl;
       cout << "Step 4:  press s to move the controller down " << endl;
@@ -665,16 +665,16 @@ int demo(char name[50]) //starts a demo for the chess
       }
       else if (c == 's')
       {
-        clrscr();
+        system("cls");
         displayBoard(2, 3);
       }
     }
 
-    delay(1000);
+    Sleep(1000);
 
     while (c != 32)
     {
-      clrscr();
+      system("cls");
       cout << name << "  Welcome to ASCII CHESS! THIS IS A Tutorial(Press esc to skip tutorial)" << endl
            << endl;
       displayBoard(1, 3);
@@ -685,19 +685,19 @@ int demo(char name[50]) //starts a demo for the chess
         return 0;
       }
     }
-    clrscr();
+    system("cls");
     cout << name << "  Welcome to ASCII CHESS! THIS IS A Tutorial(Press esc to skip tutorial)" << endl
          << endl;
     displayBoard(1, 3);
     cout << endl
          << " Piece selected : " << boardSymbols[1][3] << endl;
 
-    delay(1000);
+    Sleep(1000);
 
     int i = 1;
     int j = 3;
     char ch;
-    clrscr();
+    system("cls");
     cout << name << "  Welcome to ASCII CHESS! THIS IS A Tutorial(Press esc to skip tutorial)" << endl
          << endl;
     cout << " Step 6 : Navigate to 2,3 and press space to insert pawn to 2,3" << endl;
@@ -739,7 +739,7 @@ int demo(char name[50]) //starts a demo for the chess
       {
         return 0;
       }
-      clrscr();
+      system("cls");
       cout << name << "  Welcome to ASCII CHESS! THIS IS A Tutorial(Press esc to skip tutorial)" << endl
            << endl;
       cout << "Step 6 : Navigate to 2,3 and press space to insert pawn to 2,3" << endl;
@@ -759,7 +759,7 @@ int demo(char name[50]) //starts a demo for the chess
 
     boardSymbols[2][3] = boardSymbols[1][3];
     boardSymbols[1][3] = ' ';
-    clrscr();
+    system("cls");
     displayBoard(i, j);
     cout << "Controller : (" << i << "," << j << ")" << endl;
     cout << "piece selected : P" << endl
@@ -807,7 +807,7 @@ void checkDemo(char p1[50], char p2[50]) //checks if demo should be called for a
   else
   {
     cout << p1 << " , " << p2 << "  Welcome back to ASCII CHESS !" << endl;
-    delay(2000);
+    Sleep(2000);
   }
 }
 void newGame() //initiates a new game: takes player's name , games name -> play().
@@ -827,19 +827,19 @@ void newGame() //initiates a new game: takes player's name , games name -> play(
 
   gets(player2.name);
   checkDemo(player1.name, player2.name);
-  clrscr();
+  system("cls");
 
   loadDefault();
   play(player1, player2); //starts the actual chess game
 
 
-  clrscr();
+  system("cls");
   //update and write player details to leaderboard
   player1.games++;
   player2.games++;
   leaderboard_write(player1);
   leaderboard_write(player2);
-  delay(1000);
+  Sleep(1000);
   cout << endl;
 }
 
@@ -863,7 +863,7 @@ void leaderboard_menu()
   int c;
   while (c != 4)
   {
-    clrscr();
+    system("cls");
     cout << "LEADERBOARD" << endl
          << endl;
     cout << "1.Show leader board" << endl
@@ -883,7 +883,7 @@ void leaderboard_menu()
       break;
     case 2:
       leaderboard_search();
-      delay(2000);
+      Sleep(2000);
       break;
     case 3:
       cout << "number of players : " << leaderboard_count() << endl;
@@ -899,7 +899,7 @@ void startGame() //inits welcome page, gets the option and starts newGame() lead
   char choice;
   while (choice != 51)
   {
-    clrscr();
+    system("cls");
 
     displayMenu();
     choice = getch();
@@ -951,10 +951,11 @@ void displayBoard(int di, int dj) //displays the chess board
   cout << "  +---+---+---+---+---+---+---+---+" << endl;
 }
 
-void main()//entry point
+int main()//entry point
 {
 
-  clrscr();
+  system("cls");
   startGame();
   getch();
+  return 0;
 }
