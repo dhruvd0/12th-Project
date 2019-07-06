@@ -11,5 +11,4 @@
 * Xbox controller support :)
 
 #### Warning:
-* DO NOT try to run or convert to run in g++ 17, you will regret it.
-* Turbo Friendly
+* Turbo c++ people can go **** themselves :)
